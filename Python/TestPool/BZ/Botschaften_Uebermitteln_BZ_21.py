@@ -111,7 +111,24 @@ try:
         else:
             break
 
+    testresult.append(["Es wurden %s Änderungen des Zählers geprüft"%counter, "INFO"])
 
+    testresult.append(["[.] Prüfe, dass die Inkrementierung des Botschafszählers korrekt ist", ""])
+    if verdict_bz == 'PASSED':
+        testresult.append(["Der Botschaftszähler wurde korrekt inkrementiert", verdict_bz])
+    else:
+        testresult.append(["Der Botschaftszähler wurde nicht korrekt inkrementiert", verdict_bz])
+
+    testresult.append(["[.] Prüfe die Zykluszeit (%sms - %sms) der Inkrementierung des Botschaftszählers"%(min_cycle_time, max_cycle_time), ""])
+    if verdict_cycletime == 'PASSED':
+        testresult.append(["Die Zykluszeit des Inkrementierens ist korrekt", verdict_cycletime])
+    else:
+        testresult.append(["Die Zykluszeit des Inkrementierens ist nicht korrekt\n%s Falsche Zykluszeiten:\n"
+                              "%s"%(len(failed_ct_counter), ', '.join(map(str, failed_ct_counter))), verdict_cycletime])
+
+    testresult.append(
+        daq.plotSingleShot(bz_data, testenv.script_name.split(".py")[0], "Waehlhebel_04:Waehlhebel_04_BZ ",)
+    )
 
 
     # TEST POST CONDITIONS ####################################################
