@@ -116,6 +116,13 @@ try:
     testresult.append(
         daq.plotMultiShot(plot_data, str(testenv.script_name.split('.py')[0])))
 
+    ###add
+    plot_data = {}
+    for mes in [wh_fahrstufe, wh_sensorRoh, SiShift]:
+        plot_data[str(mes)] = daq_data[str(mes)]
+    testresult.append(
+        daq.plotMultiShot(plot_data, str(testenv.script_name.split('.py')[0])))
+
     # TEST POST CONDITIONS ####################################################
     testresult.append(["[-] Test Nachbedingungen", ""])
     testresult.append(["[+] ECU ausschalten", ""])
