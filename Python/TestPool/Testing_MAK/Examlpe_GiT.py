@@ -83,34 +83,6 @@ try:
     curr_value = analyse_bz_data.getData()
     curr_timestamp = analyse_waehlhebel_04.seek(analyse_bz_data.getTime())
 
-    verdict_cycletime = 'PASSED'
-    verdict_bz = 'PASSED'
-    counter = 0
-    failed_ct_counter = []
-    while True:
-        result = analyse_bz_data.findChanged()
-        if result:
-            next_value = analyse_bz_data.getData()
-            next_timestamp = analyse_waehlhebel_04.seek(analyse_bz_data.getTime())
-
-            curr_cycle_time = round(next_timestamp - curr_timestamp, 2)/1000.0
-            if not (min_cycle_time <= curr_cycle_time <= max_cycle_time):
-                verdict_cycletime = 'FAILED'
-                failed_ct_counter.append(curr_cycle_time)
-            curr_timestamp = next_timestamp
-
-            if curr_value == 15:
-                if next_value != 0:
-                    verdict_bz = 'FAILED'
-            else:
-                if next_value != curr_value+1:
-                    verdict_bz = 'FAILED'
-            curr_value = next_value
-
-            counter += 1
-        else:
-            break
-
 
 
     # TEST POST CONDITIONS ####################################################
